@@ -31,7 +31,14 @@ public class GameStoreSystem {
     }
 
     public void removeGameFromUserCart(int gameId) {
+        Game gameToRemove = this.searchStoreInventoryByGameId(gameId);
+        ArrayList<Game> cartToRemoveFrom = this.getUserCart();
 
+        if (cartToRemoveFrom.contains(gameToRemove)) {
+            cartToRemoveFrom.remove(gameToRemove);
+        } else {
+            throw new NoSuchElementException("   Error: The designated game does not currently exist within your cart, therefore it cannot be removed from it.");
+        }
     }
 
     public void checkoutUserCart() {
