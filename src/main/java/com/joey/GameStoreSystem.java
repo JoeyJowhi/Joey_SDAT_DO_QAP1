@@ -25,7 +25,9 @@ public class GameStoreSystem {
     }
 
     public void addGameToUserCart(int gameId) {
+        Game game = this.searchStoreInventoryByGameId(gameId);
 
+        this.getUserCart().add(game);
     }
 
     public void removeGameFromUserCart(int gameId) {
