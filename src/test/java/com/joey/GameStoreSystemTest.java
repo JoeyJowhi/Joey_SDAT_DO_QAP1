@@ -58,4 +58,24 @@ public class GameStoreSystemTest {
 
         Assertions.assertThrows(NoSuchElementException.class, ()->storeTestSubject.removeGameFromUserCart(1));
     }
+
+    @Test public void testCheckoutUserCart() {
+        Game testGame = new Game(1, "Project Zomboid", "An isometric open-world zombie apocalypse survival game. Complete with a steep skill curve and unforgiving difficulty.", 2013, new BigDecimal("29.99"));
+        Game testGame2 = new Game(2, "Rimworld", "Crash-landed on a sparsely populated lawless planet at the edge of the observable universe, a small group of people must form a colony with the goal of building a new ship to escape the planet.", 2013, new BigDecimal("34.99"));
+        Game testGame3 = new Game(3, "Baldur's Gate 3", "Unfortunately for you, an Illithid parasite has been implanted in your head. Which means you are now a ticking time-bomb until you become a Mindflayer! Find whatever allies you can and search for a cure, because if not... I hope you don't mind sporting tentacles.", 2023, new BigDecimal("79.99"));
+
+        ArrayList<Game> storeInventory = new ArrayList<>();
+        storeInventory.add(testGame);
+        storeInventory.add(testGame2);
+        storeInventory.add(testGame3);
+
+        GameStoreSystem storeTestSubject = new GameStoreSystem(storeInventory);
+
+        storeTestSubject.addGameToUserCart(1);
+        storeTestSubject.addGameToUserCart(2);
+        storeTestSubject.addGameToUserCart(3);
+
+        storeTestSubject.checkoutUserCart();
+        Assertions.assertEquals(0, storeTestSubject.getUserCart().size());
+    }
 }

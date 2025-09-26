@@ -1,10 +1,12 @@
 package com.joey;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 public class GameStoreSystem {
-    private ArrayList<Game> storeInventory, userCart = new ArrayList<>();;
+    private ArrayList<Game> storeInventory, userCart = new ArrayList<>();
 
 
     //Constructor(s)
@@ -30,7 +32,7 @@ public class GameStoreSystem {
         this.getUserCart().add(game);
     }
 
-    public void removeGameFromUserCart(int gameId) {
+    public void removeGameFromUserCart(int gameId) throws NoSuchElementException {
         Game gameToRemove = this.searchStoreInventoryByGameId(gameId);
         ArrayList<Game> cartToRemoveFrom = this.getUserCart();
 
@@ -42,7 +44,25 @@ public class GameStoreSystem {
     }
 
     public void checkoutUserCart() {
+        BigDecimal subTotal = new BigDecimal("0");
+        ArrayList<Game> cartToCheckout = this.getUserCart();
 
+        if (cartToCheckout.isEmpty()) {
+            throw new IllegalStateException("   Error: Cannot checkout an empty cart.");
+        }
+
+        for (Game game : cartToCheckout) {
+            System.out.print(game);
+
+            subTotal = subTotal.add(game.getPrice());
+        }
+
+        BigDecimal hstTotal = subTotal.multiply(new BigDecimal(".15"));
+        BigDecimal grandTotal = subTotal.add(hstTotal);
+
+        System.out.printf("\n===============\n\nSubtotal: $%,.2f\nHST: $%,.2f\n\nTotal: $%,.2f\n", subTotal, hstTotal, grandTotal);
+
+        getUserCart().clear();
     }
 
 
