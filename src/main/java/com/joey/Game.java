@@ -20,7 +20,7 @@ public class Game {
 
     //Instance Methods
     @Override public String toString() {
-        return String.format("Game[id: %d, title: %s, description: %s, releaseYear: %d]", this.getId(), this.getTitle(), this.getDescription(), this.getReleaseYear());
+        return String.format("\n===============\nID: %d\nTitle: \"%s\"\nDescription: \"%s\"\nRelease Year: %d\nPrice: $%.2f", this.getId(), this.getTitle(), this.getDescription(), this.getReleaseYear(), this.getPrice());
     }
 
 
