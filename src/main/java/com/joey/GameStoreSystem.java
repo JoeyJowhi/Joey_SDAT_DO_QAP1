@@ -16,6 +16,26 @@ public class GameStoreSystem {
 
 
     //Instance Methods
+    public void addGameToStoreInventory(Game game) throws IllegalArgumentException {
+        ArrayList<Game> storeInventory = this.getStoreInventory();
+
+        if (!storeInventory.contains(game)) {
+            storeInventory.add(game);
+        } else {
+            throw new IllegalArgumentException("   Error: This game already exists within the store's inventory.");
+        }
+    }
+
+    public void removeGameFromStoreInventoryById(int gameId) throws NoSuchElementException {
+        try {
+            Game gameToRemove = this.searchStoreInventoryByGameId(gameId);
+
+            this.getStoreInventory().remove(gameToRemove);
+        } catch (NoSuchElementException e) {
+            throw new NoSuchElementException(String.format("   Error: There was no game with the id \"%d\" found within the store's inventory.", gameId));
+        }
+    }
+
     public Game searchStoreInventoryByGameId(int gameId) throws NoSuchElementException {
         for (Game game : this.getStoreInventory()) {
             if (gameId == game.getId()) {
@@ -83,11 +103,5 @@ public class GameStoreSystem {
 
     public void setUserCart(ArrayList<Game> userCart) {
         this.userCart = userCart;
-    }
-
-
-    //Storefront Menu
-    public static void main(String[] args) {
-
     }
 }
