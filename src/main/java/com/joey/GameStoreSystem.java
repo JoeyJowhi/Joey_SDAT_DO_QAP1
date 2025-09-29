@@ -3,13 +3,16 @@ package com.joey;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 public class GameStoreSystem {
     private ArrayList<Game> storeInventory, userCart = new ArrayList<>();
 
 
     //Constructor(s)
+    public GameStoreSystem() {
+        this.storeInventory = new ArrayList<>();
+    }
+
     public GameStoreSystem(ArrayList<Game> storeInventory) {
         this.storeInventory = storeInventory;
     }
