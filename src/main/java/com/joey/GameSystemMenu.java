@@ -10,11 +10,11 @@ public class GameSystemMenu {
         Scanner userInput = new Scanner(System.in);
         int userChoice = 0;
 
-        while(userChoice != 7) {
+        while(userChoice != 6) {
             System.out.print("\n\n---------------\nJoey's Game Emporium\n---------------");
 
             if (!gameStoreSystem.getStoreInventory().isEmpty()) {
-                System.out.print("\n   Our Inventory");
+                System.out.print("\nOur Inventory");
 
                 for (Game game : gameStoreSystem.getStoreInventory()) {
                     System.out.print(game);
@@ -23,7 +23,7 @@ public class GameSystemMenu {
                 System.out.print("\n===============\n\nMenu Options:\n---------------");
             }
 
-            System.out.print("\n1. (StoreInventory) Add a game.\n2. (StoreInventory) Remove a game by ID.\n3. Search by gameID.\n4. Add a game to your cart.\n5. Remove a game from you cart.\n6. Take your cart to checkout\n7. Exit.\n---------------\n");
+            System.out.print("\n1. (StoreInventory) Add a game.\n2. (StoreInventory) Remove a game by ID.\n3. Add a game to your cart.\n4. Remove a game from you cart.\n5. Take your cart to checkout\n6. Exit.\n---------------\n");
 
             System.out.print("\nChoose an option: ");
             try {
@@ -105,21 +105,71 @@ public class GameSystemMenu {
                     System.out.println("===Game successfully added to StoreInventory===");
                     break;
                 case 2:
+                    int gameIdForRemoval;
 
+                    do {
+                        System.out.print("\n\nEnter the id for the game you'd like to remove: ");
+
+                        if (!userInput.hasNextInt()) {
+                            userInput.nextLine();
+                            System.out.println("   Error: Please enter a valid integer for the game's id.");
+                            continue;
+                        }
+
+                        gameIdForRemoval = userInput.nextInt();
+                        userInput.nextLine();
+                        break;
+                    } while (true);
+
+                    gameStoreSystem.removeGameFromStoreInventoryById(gameIdForRemoval);
+                    System.out.println("===Game Successfully Removed from StoreInventory===");
                     break;
                 case 3:
+                    int gameIdToAddToCart;
 
+                    do {
+                        System.out.print("\n\nEnter the id for the game you'd like to add to your cart: ");
+
+                        if (!userInput.hasNextInt()) {
+                            userInput.nextLine();
+                            System.out.println("   Error: Please enter a valid integer for the game's id.");
+                            continue;
+                        }
+
+                        gameIdToAddToCart = userInput.nextInt();
+                        userInput.nextLine();
+                        break;
+                    } while (true);
+
+                    gameStoreSystem.addGameToUserCart(gameIdToAddToCart);
+                    System.out.println("===Game Successfully Added to Cart===");
                     break;
                 case 4:
+                    int gameIdToRemoveFromCart;
 
+                    do {
+                        System.out.print("\n\nEnter the id for the game you'd like to remove from your cart: ");
+
+                        if (!userInput.hasNextInt()) {
+                            userInput.nextLine();
+                            System.out.println("   Error: Please enter a valid integer for the game's id.");
+                            continue;
+                        }
+
+                        gameIdToRemoveFromCart = userInput.nextInt();
+                        userInput.nextLine();
+                        break;
+                    } while (true);
+
+                    gameStoreSystem.removeGameFromUserCart(gameIdToRemoveFromCart);
+                    System.out.println("===Game Successfully Removed from Cart===");
                     break;
                 case 5:
-
+                    System.out.println("===Checkout Receipt===");
+                    gameStoreSystem.checkoutUserCart();
+                    System.out.println("===Thank you for choosing Joey's Game Emporium===");
                     break;
                 case 6:
-
-                    break;
-                case 7:
                     System.out.println("Thank you for visiting, come again!");
                     break;
                 default:
@@ -127,7 +177,7 @@ public class GameSystemMenu {
 
             }
 
-            if (userChoice != 7) {
+            if (userChoice != 6) {
                 System.out.print("Press 'Enter' to return to menu: ");
                 userInput.nextLine();
             }
