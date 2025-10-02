@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class GameSystemMenu {
+public class GameStoreMenu {
     public static void main(String[] args) {
         GameStoreSystem gameStoreSystem = new GameStoreSystem();
         Scanner userInput = new Scanner(System.in);
