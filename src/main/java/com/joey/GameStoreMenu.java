@@ -1,12 +1,23 @@
 package com.joey;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class GameStoreMenu {
     public static void main(String[] args) {
         GameStoreSystem gameStoreSystem = new GameStoreSystem();
+
+        ArrayList<Game> defaultInventory = new ArrayList<>();
+        Game defaultGame1 = new Game(1, "Project Zomboid", "An isometric open-world zombie apocalypse survival game. Complete with a steep skill curve and unforgiving difficulty.", 2013, new BigDecimal("29.99"));
+        Game defaultGame2 = new Game(2, "Rimworld", "Crash-landed on a sparsely populated lawless planet at the edge of the observable universe, a small group of people must form a colony with the goal of building a new ship to escape the planet.", 2013, new BigDecimal("34.99"));
+        Game defaultGame3 = new Game(3, "Baldur's Gate 3", "Unfortunately for you, an Illithid parasite has been implanted in your head. Which means you are now a ticking time-bomb until you become a Mindflayer! Find whatever allies you can and search for a cure, because if not... I hope you don't mind sporting tentacles.", 2023, new BigDecimal("79.99"));
+        defaultInventory.add(defaultGame1);
+        defaultInventory.add(defaultGame2);
+        defaultInventory.add(defaultGame3);
+
+        gameStoreSystem.setStoreInventory(defaultInventory);
         Scanner userInput = new Scanner(System.in);
         int userChoice = 0;
 
